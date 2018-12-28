@@ -7,6 +7,10 @@ goiler
 goiler is a command-line tool to manange Go package boilerplates.
 
 
+## Related projects
+- [tmrts/boilr](https://github.com/tmrts/boilr)
+
+
 <!-- badge links -->
 [circleci]: https://circleci.com/gh/zchee/workflows/goiler
 [codecov]: https://codecov.io/gh/zchee/goiler
