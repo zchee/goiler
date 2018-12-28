@@ -175,7 +175,7 @@ mod: mod/clean mod/init mod/tidy mod/vendor  ## Updates the vendoring directory 
 .PHONY: mod/install
 mod/install: mod/tidy mod/vendor
 	$(call target)
-	@GO111MODULE=off go install -v $(GO_VENDOR_PKGS) || GO111MODULE=on go install -v $(GO_VENDOR_PKGS)
+	@GO111MODULE=off go install -v $(GO_VENDOR_PKGS) || GO111MODULE=on go install -mod=vendor -v $(GO_VENDOR_PKGS)
 
 .PHONY: mod/update
 mod/update: mod/goget mod/tidy mod/vendor mod/install  ## Updates all vendor packages.
@@ -205,7 +205,7 @@ dep/ensure/vendor-only: cmd/dep Gopkg.toml Gopkg.lock  ## Fetch vendor packages 
 
 .PHONY: dep/install
 dep/install: dep/ensure  ## Compiles vendor packages to object(.a) file.
-	@go install -v $(shell go list -f '{{if and (or .GoFiles .CgoFiles) (ne .Name "main")}}{{.ImportPath}}{{end}}' ./vendor/...)
+	@go install -v $(GO_VENDOR_PKGS)
 
 .PHONY: dep/update
 dep/update: cmd/dep  ## Updates the vendoring directory via dep
